@@ -11,8 +11,160 @@ namespace Starwars
     {
         static void Main(string[] args)
         {
+            NameComparer compare = new NameComparer();
             List<Planet> planets = LoadData();
+            /*Console.ReadKey()*/
+            ;
+
+            ////Take the list and search through all names, and take all planet that start's with m and return is as a list. instead of a enmumerable
+            var plans = planets.Where(o => o.Name.First() == 'M').ToList();
+
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine(plans[i].Name);
+            }
+
             Console.ReadKey();
+            Console.Clear();
+            //Take the list planet and search all names, set to lower, make it to char array and search for letter y return as list
+            plans = planets.Where(o => o.Name.ToLower().Contains('y')).ToList();
+            //run through list and print out object names
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine(plans[i].Name);
+            }
+            Console.ReadKey();
+            Console.Clear();
+
+            plans = planets.Where(o => o.Name.Length > 9 && o.Name.Length < 15).ToList();
+
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine(plans[i].Name);
+            }
+
+            Console.ReadKey();
+            Console.Clear();
+            plans = planets.Where(o => o.Name[1] == 'a' && o.Name.EndsWith("e")).ToList();
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine(plans[i].Name);
+            }
+
+            Console.ReadKey();
+            Console.Clear();
+
+            plans = planets.Where(o => o.RotationPeriod > 40).ToList().OrderBy(o => o.RotationPeriod).ToList();
+
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine($"{ plans[i].Name} {plans[i].RotationPeriod}");
+            }
+            Console.ReadKey();
+            Console.Clear();
+
+
+            plans = planets.Where(o => o.RotationPeriod > 10 && o.RotationPeriod < 20).ToList().OrderBy(o => o.Name).ToList();
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine($"{ plans[i].Name} {plans[i].RotationPeriod}");
+            }
+            Console.ReadKey();
+            Console.Clear();
+
+            plans = planets.Where(o => o.RotationPeriod > 30).ToList().OrderBy(o => o.Name).ThenBy(o => o.RotationPeriod).ToList();
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine($"{ plans[i].Name} {plans[i].RotationPeriod}");
+            }
+            Console.ReadKey();
+            Console.Clear();
+
+
+            plans = planets.Where(o => o.RotationPeriod < 30 || o.SurfaceWater > 50).Where(o => o.Name.Contains("ba")).ToList();
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine($"{ plans[i].Name} {plans[i].RotationPeriod}");
+            }
+            Console.ReadKey();
+            Console.Clear();
+
+            plans = planets.Where(o => o.SurfaceWater > 0).OrderByDescending(o => o.SurfaceWater).ToList();
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine($"{ plans[i].Name} {plans[i].SurfaceWater}");
+            }
+            Console.ReadKey();
+            Console.Clear();
+
+            plans = planets.Where(o => o.Diameter > 0 && o.Population > 0).OrderBy(o => o.Diameter * (4 * Math.PI) / o.Population).ToList();
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine($"{ plans[i].Name} {plans[i].Diameter}");
+            }
+            Console.ReadKey();
+            Console.Clear();
+
+            var tempPlanets = planets.Where(o => o.RotationPeriod > 0).ToList();
+            plans = planets.Except(tempPlanets).ToList();
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine($"{ plans[i].Name} ");
+            }
+            Console.ReadKey();
+            Console.Clear();
+
+            plans = planets.Where(o => o.Name.First() == 'A' || o.Name.Last() == 's').ToList();
+            var plansTwo = planets.Where(o => o.Terrain != null && o.Terrain.Contains("rainforests")).ToList();
+
+            var plansThree = plans.Union(plansTwo);
+            //Instead of using  tolist, i used GetEnumerator to run throughn the Ienumberable
+            using (var plan = plansThree.GetEnumerator())
+            {
+                //moving ot next object in collection
+                while (plan.MoveNext())
+                {
+                    Console.WriteLine(plan.Current.Name);
+                }
+            }
+
+            Console.ReadKey();
+            Console.Clear();
+
+            plans = planets.Where(o => o.Terrain != null && (o.Terrain.Contains("deserts") || o.Terrain.Contains("rocky deserts"))).ToList();
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine(plans[i].Name);
+            }
+            Console.ReadKey();
+            Console.Clear();
+
+
+            plans = planets.Where(o => o.Terrain != null && (o.Terrain.Contains("swamps") || o.Terrain.Contains("swamp"))).OrderBy(o => o.RotationPeriod).ThenBy(o => o.Name).ToList();
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine(plans[i].Name);
+            }
+            Console.ReadKey();
+            Console.Clear();
+
+            plans = planets.Where(o => o.Name.Contains("aa") || o.Name.Contains("ee") || o.Name.Contains("ii") || o.Name.Contains("oo") || o.Name.Contains("uu") || o.Name.Contains("yy")).ToList();
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine(plans[i].Name);
+            }
+            Console.ReadKey();
+            Console.Clear();
+
+
+            plans = planets.Where(o => o.Name.Contains("kk") || o.Name.Contains("ll") || o.Name.Contains("rr") || o.Name.Contains("nn")).OrderByDescending(o => o.Name).ToList();
+            for (int i = 0; i < plans.Count(); i++)
+            {
+                Console.WriteLine(plans[i].Name);
+            }
+            Console.ReadKey();
+            Console.Clear();
+
         }
 
 
@@ -82,7 +234,7 @@ namespace Starwars
                 new Planet { Name="Stewjon",Terrain= new List<string>{ "grass"}},
                 new Planet { Name="Eriadu",Terrain= new List<string>{ "cityscape"},RotationPeriod=24, Diameter=13490  , Population= 22000000000},
              };
-          return planets;
+            return planets;
         }
     }
 }

@@ -16,6 +16,14 @@ namespace Starwars
             }
             return false;
         }
+        public bool BiggerThanZero(Planet x)
+        {
+            if (x.RotationPeriod > 0)
+                return true;
+            else
+                return false;
+
+        }
 
         public int GetHashCode(Planet obj)
         {
