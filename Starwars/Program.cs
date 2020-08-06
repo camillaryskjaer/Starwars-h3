@@ -17,6 +17,10 @@ namespace Starwars
             ;
 
             ////Take the list and search through all names, and take all planet that start's with m and return is as a list. instead of a enmumerable
+            
+            //Fint du bruger First, men du mangler ToLower
+               var plans = planets.Where(o => o.Name.ToLower().First() == 'M').ToList();
+
             var plans = planets.Where(o => o.Name.First() == 'M').ToList();
 
             for (int i = 0; i < plans.Count(); i++)
@@ -119,6 +123,7 @@ namespace Starwars
 
             var plansThree = plans.Union(plansTwo);
             //Instead of using  tolist, i used GetEnumerator to run throughn the Ienumberable
+            //Hvorfor? Hvad er en Enumerator?
             using (var plan = plansThree.GetEnumerator())
             {
                 //moving ot next object in collection
